@@ -1,1 +1,5 @@
-Hello world.
+def sum(a,b)
+{
+println "Sum is " +(a+b)
+}
+sum(5,5)
