@@ -5,7 +5,7 @@ pipeline{
         stage('Git Checkout') {
             steps {
             script{
-            checkout_script("main")
+            checkout_script()
 
             }
             }
