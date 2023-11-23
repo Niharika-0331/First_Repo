@@ -11,7 +11,7 @@ pipeline{
         stage('Git Checkout') {
             steps {
             script{
-            checkout_script()
+            checkout_script(params)
 
             }
             }
