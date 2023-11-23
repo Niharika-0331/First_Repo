@@ -22,7 +22,7 @@ pipeline{
             steps {
                 script {
                     // Run Gradle build command
-                    bat 'gradle clean'
+                    bat 'gradle build'
                 }
             }
         }
