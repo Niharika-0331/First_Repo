@@ -2,7 +2,7 @@
 pipeline{
     agent any
 	tools{
-		gradle('8.4')
+		gradle('2.9')
 	}
 	
 	parameters	{
