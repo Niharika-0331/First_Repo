@@ -18,10 +18,7 @@ pipeline{
             }
             }
 			}
-        
-         }
-	
-	 stage('Build') {
+	     stage('Build') {
             steps {
                 script {
                     // Run Gradle build command
@@ -29,4 +26,8 @@ pipeline{
                 }
             }
         }
+        
+         }
+	
+	
 }
