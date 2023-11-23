@@ -1,6 +1,9 @@
 @Library ('First_Repo')_
 pipeline{
     agent any
+	tools{
+		gradle('8.4')
+	}
 	
 	parameters	{
         string(name :'branch', defaultValue: 'main')
@@ -17,4 +20,12 @@ pipeline{
 			}
         
          }
+	 stage('Build') {
+            steps {
+                script {
+                    // Run Gradle build command
+                    sh './gradlew clean'
+                }
+            }
+        }
 }
