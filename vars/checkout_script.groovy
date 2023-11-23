@@ -1,6 +1,6 @@
-def call(Map stageParams){
+def call(){
 checkout([
 $class: 'GitSCM',
-branches: [[name: stageParams.branch]], 
-userRemoteConfigs: [[url: stageParams.Url]]
+branches: [[name: 'main']], 
+userRemoteConfigs: [[url:'https://github.com/Niharika-0331/First_Repo.git']]
 ])}
