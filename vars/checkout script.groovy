@@ -16,7 +16,6 @@
 
     repoDir.with {
 
-
 // Checkout the specified branch
         def checkoutCommand = "git checkout ${branch}"
         println "Executing: ${checkoutCommand}"
