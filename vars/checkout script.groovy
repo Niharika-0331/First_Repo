@@ -1,5 +1,4 @@
 
-def call() {
     def gitUrl = 'https://github.com/Niharika-0331/First_Repo'
     def localDir = "C:\\Users\\nbobbili\\Downloads\\Checkout\\"
     def branch = 'main'
@@ -27,4 +26,4 @@ def call() {
 
 
     }
-}
+
