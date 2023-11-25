@@ -10,7 +10,7 @@ pipeline{
 	string(name :'url', defaultValue: 'https://github.com/Niharika-0331/First_Repo.git')
 	}
 	environment {
-        PATH_TO_JFROG_CLI = "C:\jfrog\artifactory-pro-7.71.5\app\\.jfrog\\cli\\bin\\"
+        PATH_TO_JFROG_CLI = "C:\\jfrog\\artifactory-pro-7.71.5\app\\.jfrog\\cli\\bin\\"
         ARTIFACTORY_USER = 'admin'
         ARTIFACTORY_API_KEY = 'Taxilla@186'
         ARTIFACTORY_REPO_URL = 'https://62e8-49-37-152-163.ngrok-free.app/artifactory/Jfrogrepo/'
