@@ -14,7 +14,7 @@ pipeline{
         ARTIFACTORY_URL = 'https://taxilla.jfrog.io/'
         ARTIFACTORY_REPO = 'result'
         ARTIFACTORY_USERNAME = 'niharikabobbili03@gmail.com'
-        ARTIFACTORY_PASSWORD = credentials('Taxilla@186')
+        ARTIFACTORY_PASSWORD ='Taxilla@186'
         
         // Set your artifact details
         ARTIFACT_PATH = 'C:/my-artifact/my-artifact.jar'
