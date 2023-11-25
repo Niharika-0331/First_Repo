@@ -32,7 +32,7 @@ pipeline{
                 }
             }
         }
-	   stages {
+	    
         stage('Upload to Artifactory') {
             steps {
                 script {
@@ -42,8 +42,12 @@ pipeline{
                     withEnv(["PATH+EXTRA=%PATH%;${PATH_TO_JFROG_CLI}"]) {
                         bat "jfrog rt config --url ${ARTIFACTORY_REPO_URL} --user ${ARTIFACTORY_USER} --apikey ${ARTIFACTORY_API_KEY} --interactive=false"
                         bat 'jfrog rt u --spec build-info.json'
+		    }
+		}
+    }}
     }
-	 post {
+	
+	post {
         success {
             echo 'Artifact uploaded successfully to Artifactory!'
         }
