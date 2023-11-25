@@ -41,7 +41,7 @@ pipeline{
             steps {
                 script {
                     // Use Artifactory Maven or Gradle plugin or curl command to upload artifact
-                    withCredentials([usernamePassword(credentialsId:'ARTIFACTORY_PASSWORD', usernameVariable:'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD')]) 
+                    withCredentials([usernamePassword(credentialsId:ARTIFACTORY_REPO', usernameVariable:'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD')]) 
 		{
                         bat """
                             curl -u ${ARTIFACTORY_USERNAME}:${ARTIFACTORY_PASSWORD} -T ${ARTIFACT_PATH} ${ARTIFACTORY_URL}/${ARTIFACTORY_REPO}/${TARGET_REPO_PATH}/
