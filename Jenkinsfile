@@ -17,7 +17,7 @@ pipeline{
         ARTIFACTORY_PASSWORD = credentials('Taxilla@186')
         
         // Set your artifact details
-        ARTIFACT_PATH = 'C:\my-artifact.jar'
+        ARTIFACT_PATH = 'C:\my-artifact\my-artifact.jar'
         TARGET_REPO_PATH = 'C:\jfrog\artifactory-pro-7.71.5\app\bin\result'
     }
 	
