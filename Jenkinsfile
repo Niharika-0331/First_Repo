@@ -10,15 +10,10 @@ pipeline{
 	string(name :'url', defaultValue: 'https://github.com/Niharika-0331/First_Repo.git')
 	}
 	environment {
-        // Set your Artifactory details
-        ARTIFACTORY_URL = 'https://taxilla.jfrog.io/'
-        ARTIFACTORY_REPO = 'result'
-        ARTIFACTORY_USERNAME = 'niharikabobbili03@gmail.com'
-        ARTIFACTORY_PASSWORD = 'Taxilla@186'
-        
-        // Set your artifact details
-        ARTIFACT_PATH = 'C:/my-artifact/my-artifact.jar'
-        TARGET_REPO_PATH = 'https://taxilla.jfrog.io/ui/admin/repositories/local/result/'
+        PATH_TO_JFROG_CLI = "C:\jfrog\artifactory-pro-7.71.5\app\\.jfrog\\cli\\bin\\"
+        ARTIFACTORY_USER = 'admin'
+        ARTIFACTORY_API_KEY = 'Taxilla@186'
+        ARTIFACTORY_REPO_URL = 'https://62e8-49-37-152-163.ngrok-free.app/artifactory/Jfrogrepo/'
     }
 	
     stages {
@@ -37,19 +32,16 @@ pipeline{
                 }
             }
         }
-	    stage('Upload to Artifactory') {
+	   stages {
+        stage('Upload to Artifactory') {
             steps {
                 script {
-                    // Use Artifactory Maven or Gradle plugin or curl command to upload artifact
-                    withCredentials([usernamePassword(usernameVariable:'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD')]) 
-		{
-                        bat """
-                            curl -u ${ARTIFACTORY_USERNAME}:${ARTIFACTORY_PASSWORD} -T ${ARTIFACT_PATH} ${ARTIFACTORY_URL}/${ARTIFACTORY_REPO}/${TARGET_REPO_PATH}/
-                        """
-                    }
-                }
-            }
-        }
+                    bat "curl -fL https://62e8-49-37-152-163.ngrok-free.app | sh"
+                    bat "set PATH=%PATH%;${PATH_TO_JFROG_CLI}"
+
+                    withEnv(["PATH+EXTRA=%PATH%;${PATH_TO_JFROG_CLI}"]) {
+                        bat "jfrog rt config --url ${ARTIFACTORY_REPO_URL} --user ${ARTIFACTORY_USER} --apikey ${ARTIFACTORY_API_KEY} --interactive=false"
+                        bat 'jfrog rt u --spec build-info.json'
     }
 	 post {
         success {
