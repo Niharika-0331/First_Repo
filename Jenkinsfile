@@ -10,7 +10,7 @@ pipeline{
 	string(name :'url', defaultValue: 'https://github.com/Niharika-0331/First_Repo.git')
 	}
 	environment {
-        MY_CREDENTIALS = credentials('niharikabobbili03@gmail.com:Taxilla@186')
+        MY_CREDENTIALS = credentials('niharikabobbili03@gmail.com':'Taxilla@186')
     }
 
 	
