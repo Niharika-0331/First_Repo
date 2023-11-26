@@ -14,7 +14,7 @@ pipeline{
         ARTIFACTORY_URL = 'https://taxilla.jfrog.io'
         ARTIFACTORY_REPO = 'result'
         ARTIFACTORY_USERNAME = 'niharikabobbili03@gmail.com'
-        ARTIFACTORY_PASSWORD = credentials('Password')
+        ARTIFACTORY_PASSWORD = 'Taxilla@186'
         
         // Set your artifact details
         ARTIFACT_PATH = 'C:\\my-artifact.jar'
@@ -43,7 +43,7 @@ stage('Upload to Artifactory') {
             steps {
                 script {
                     // Use Artifactory Maven or Gradle plugin or curl command to upload artifact
-                    withCredentials([usernamePassword(credentialsId:'ARTIFACTORY_PASSWORD' , usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD')]) {
+                    withCredentials([usernamePassword(usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD')]) {
                         bat """
                             curl -u ${ARTIFACTORY_USERNAME}:${ARTIFACTORY_PASSWORD} -T ${ARTIFACT_PATH} ${ARTIFACTORY_URL}/${ARTIFACTORY_REPO}/${TARGET_REPO_PATH}/
                         """
