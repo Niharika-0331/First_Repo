@@ -10,11 +10,17 @@ pipeline{
 	string(name :'url', defaultValue: 'https://github.com/Niharika-0331/First_Repo.git')
 	}
 	environment {
-        PATH_TO_JFROG_CLI = "C:\\jfrog\\artifactory-oss-7.71.5\\app\\bin"
-        ARTIFACTORY_USER = 'admin'
-        ARTIFACTORY_API_KEY = 'Taxilla@186'
-        ARTIFACTORY_REPO_URL = 'https://62e8-49-37-152-163.ngrok-free.app/artifactory/Jfrogrepo/'
+        // Set your Artifactory details
+        ARTIFACTORY_URL = 'https://taxilla.jfrog.io'
+        ARTIFACTORY_REPO = 'result'
+        ARTIFACTORY_USERNAME = 'niharikabobbili03@gmail.com'
+        ARTIFACTORY_PASSWORD = credentials('Taxilla@186')
+        
+        // Set your artifact details
+        ARTIFACT_PATH = 'C:\\my-artifact.jar'
+        TARGET_REPO_PATH = 'https://taxilla.jfrog.io/artifactory/result'
     }
+
 	
     stages {
         stage('Git Checkout') {
@@ -33,18 +39,18 @@ pipeline{
             }
         }
 	    
-        stage('Upload to Artifactory') {
+stage('Upload to Artifactory') {
             steps {
                 script {
-                    bat 'curl -fL https://62e8-49-37-152-163.ngrok-free.app| powershell -command -'
-                    bat "set PATH=%PATH%;${PATH_TO_JFROG_CLI}"
-
-                    withEnv(["PATH+EXTRA=%PATH%;${PATH_TO_JFROG_CLI}"]) {
-                        bat "jfrog rt config --url ${ARTIFACTORY_REPO_URL} --user ${ARTIFACTORY_USER} --apikey ${ARTIFACTORY_API_KEY} --interactive=false"
-                        bat 'jfrog rt u --spec build-info.json'
-		    }
-		}
-    }}
+                    // Use Artifactory Maven or Gradle plugin or curl command to upload artifact
+                    withCredentials([usernamePassword(credentialsId:'ARTIFACTORY_REPO', usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD')]) {
+                        bat """
+                            curl -u ${ARTIFACTORY_USERNAME}:${ARTIFACTORY_PASSWORD} -T ${ARTIFACT_PATH} ${ARTIFACTORY_URL}/${ARTIFACTORY_REPO}/${TARGET_REPO_PATH}/
+                        """
+                    }
+                }
+            }
+        }
     }
 	
 	post {
