@@ -11,6 +11,9 @@ pipeline{
         string(name :'branch', defaultValue: 'main')
 	string(name :'url', defaultValue: 'https://github.com/Niharika-0331/First_Repo.git')
 	}
+	environment {
+		jfrog_CLI_home=tool 'Jfrog_CLI'
+	}
 	
     stages {
         stage('Git Checkout') {
@@ -45,7 +48,8 @@ pipeline{
                     def fileToUpload = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\Pipeline_demo\\my-artifact.jar'
 
                     // Execute the JFrog CLI command to upload the artifact
-                    bat 'jfrog rt u ${fileToUpload} ${repo}/${artifact}/${version}/ --url=${server} --user=${user} --apikey=${apiKey} --build-name=my-build --build-number=1'
+
+                    bat '${jfrog_CLI_home}/jfrog rt u ${fileToUpload} ${repo}/${artifact}/${version}/ --url=${server} --user=${user} --apikey=${apiKey} --build-name=my-build --build-number=1'
                 }
             }
         }
