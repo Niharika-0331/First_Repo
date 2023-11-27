@@ -6,8 +6,7 @@ pipeline{
 		jfrog'Jfrog_CLI'
 		
 	}
-	
-	parameters	{
+		parameters	{
         string(name :'branch', defaultValue: 'main')
 	string(name :'url', defaultValue: 'https://github.com/Niharika-0331/First_Repo.git')
         string(name: 'DEPLOY_ENV', defaultValue: 'production', description: 'Deployment environment')
