@@ -15,7 +15,7 @@ pipeline{
         REPO = 'result'
         ARTIFACT = 'my-artifact'
         VERSION = '1.0'
-        FILE_TO_UPLOAD = ""C:/Users/nbobbili/Downloads/${ARTIFACT}-${VERSION}.jar"
+        FILE_TO_UPLOAD = 'C:/Users/nbobbili/Downloads/${ARTIFACT}-${VERSION}.jar'
     }
 	
     stages {
