@@ -46,11 +46,8 @@ pipeline{
                 }
             }
         }
-    }
+    
 }
-        }
-    }
-	
 	post {
         success {
             echo 'Artifact uploaded successfully to Artifactory!'
