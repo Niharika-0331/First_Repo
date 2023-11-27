@@ -10,7 +10,7 @@ pipeline{
         string(name :'branch', defaultValue: 'main')
 	string(name :'url', defaultValue: 'https://github.com/Niharika-0331/First_Repo.git')
         string(name: 'DEPLOY_ENV', defaultValue: 'production', description: 'Deployment environment')
-        string(name: 'RECIPIENT_EMAIL', defaultValue: 'niharikabobbili07@gmail.com', description: 'Recipient email address')
+        string(name: 'RECIPIENT_EMAIL', defaultValue: 'niharikabobbili03@gmail.com', description: 'Recipient email address')
         string(name: 'REPORTS_PATH', defaultValue: 'C:/Users/nbobbili/Downloads/Build reports', description: 'Path to reports')
 		
 	}
