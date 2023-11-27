@@ -12,7 +12,9 @@ pipeline{
 	}
 	  environment {
         ARTIFACTORY_SERVER_ID = 'jfrog_instance'
-        REPO = 'result'
+        ARTIFACTORY_USERNAME  = 'niharikabobbili03@gmail.com'
+       ARTIFACTORY_PASSWORD = 'Taxilla@186'
+      REPO = 'result'
         ARTIFACT = 'my-artifact'
         VERSION = '1.0'
         FILE_TO_UPLOAD = 'C:/Users/nbobbili/Downloads/${ARTIFACT}-${VERSION}.jar'
@@ -38,7 +40,7 @@ pipeline{
         stage('Upload to Artifactory') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: env.ARTIFACTORY_SERVER_ID, variable: 'Credentials')]) {
+                    withCredentials([string(credentialsId: env.ARTIFACTORY_SERVER_ID, usernamePassword(usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD'))]) {
                         bat "jfrog rt u ${FILE_TO_UPLOAD} ${REPO}/${ARTIFACT}/${VERSION}/${ARTIFACT}-${VERSION}.jar --url=${ARTIFACTORY_SERVER} --user=${ARTIFACTORY_SERVER_CREDENTIALS_USR} --apikey=${ARTIFACTORY_SERVER_CREDENTIALS_PSW} --build-name=my-build --build-number=1"
                     }
                 }
