@@ -45,11 +45,11 @@ pipeline{
                     def version = '1.0'
 
                     // Example of uploading a JAR file
-                    def fileToUpload = 'my-artifact.jar.zip'
+                    def fileToUpload = 'C:\Users\nbobbili\Downloads\my-artifact.jar.zip'
 
                     // Execute the JFrog CLI command to upload the artifact
 
-                    def command=  """${jfrog_CLI_home}\\jf rt u ${fileToUpload} ${repo}/${artifact}/${version}/ --url=${server} --user=${user} --password=${apiKey} --build-name=my-build --build-number=1"""
+                    def command=  """${jfrog_CLI_home}\\jf rt u ${fileToUpload} ${repo}/ --url=${server} --user=${user} --password=${apiKey} --build-name=my-build --build-number=1"""
                 bat command
 		}
             }
