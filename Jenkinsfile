@@ -49,7 +49,7 @@ pipeline{
 
                     // Execute the JFrog CLI command to upload the artifact
 
-                    bat '${jfrog_CLI_home}/jfrog rt u ${fileToUpload} ${repo}/${artifact}/${version}/ --url=${server} --user=${user} --apikey=${apiKey} --build-name=my-build --build-number=1'
+                    bat "${jfrog_CLI_home}/jfrog rt u ${fileToUpload} ${repo}/${artifact}/${version}/ --url=${server} --user=${user} --apikey=${apiKey} --build-name=my-build --build-number=1"
                 }
             }
         }
