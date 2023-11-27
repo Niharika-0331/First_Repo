@@ -41,11 +41,11 @@ pipeline{
                     def apiKey = 'Taxilla@186'  // or password
 
                     // Replace 'your-artifact' and 'your-version' with your actual artifact details
-                    def artifact = 'C:/ProgramData/Jenkins/.jenkins/workspace/Pipeline_demo/*'
+                    def artifact = 'my-artifact'
                     def version = '1.0'
 
                     // Example of uploading a JAR file
-                    def fileToUpload = 'my-artifact.jar'
+                    def fileToUpload = 'C:/ProgramData/Jenkins/.jenkins/workspace/Pipeline_demo/*'
 
                     // Execute the JFrog CLI command to upload the artifact
 
