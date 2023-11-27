@@ -16,7 +16,7 @@ pipeline{
 	}
 	environment {
 		jfrog_CLI_home=tool 'Jfrog_CLI'
-		jfrog_instance
+	
 	}
 	
     stages {
