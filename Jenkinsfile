@@ -41,7 +41,7 @@ pipeline{
                     def apiKey = 'Taxilla@186'  // or password
 
                     // Replace 'your-artifact' and 'your-version' with your actual artifact details
-                    def artifact = 'my-artifact'
+                    def artifact = 'C:/ProgramData/Jenkins/.jenkins/workspace/Pipeline_demo/*'
                     def version = '1.0'
 
                     // Example of uploading a JAR file
