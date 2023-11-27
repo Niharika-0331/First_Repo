@@ -35,7 +35,7 @@ pipeline{
  stage('Upload to Artifactory') {
             steps {
                 script {
-                    def server = 'https://taxilla.jfrog.io/'
+                    def server = 'https://taxilla.jfrog.io/artifactory'
                     def repo = 'jfrog_repo-generic-local'
                     def user = 'niharikabobbili03@gmail.com'
                     def apiKey = 'Taxilla@186'  // or password
@@ -49,7 +49,7 @@ pipeline{
 
                     // Execute the JFrog CLI command to upload the artifact
 
-                    def command=  """${jfrog_CLI_home}\\jf rt u ${fileToUpload} ${repo} --url=${server} --user=${user} --password=${apiKey} --build-name=my-build --build-number=1"""
+                    def command=  """${jfrog_CLI_home}\\jf rt u ${fileToUpload} ${repo}/ --url=${server} --user=${user} --password=${apiKey} --build-name=my-build --build-number=1"""
                 bat command
 		}
             }
