@@ -42,7 +42,6 @@ pipeline{
                     def repo = 'jfrog_repo-generic-local'
                     def user = 'niharikabobbili03@gmail.com'
                     def apiKey = 'Taxilla@186'  // or password
-                  // Replace 'your-artifact' and 'your-version' with your actual artifact details
                     def artifact = 'my-artifact'
                     def version = '1.0'
                   // Example of uploading a JAR file
@@ -56,12 +55,13 @@ pipeline{
 	    stage('Post-Deployment') {
             steps {
             
-                emailext(
+                emailtext(
                     subject: "Deployment Notification - ${params.DEPLOY_ENV}",
                     body: "Deployment successful. Please find attached reports.",
                     to: "${params.RECIPIENT_EMAIL}",
                     attachLog: true,
-                    attachmentsPattern: "**/${params.REPORTS_PATH}/*.txt"
+                    attachmentsPattern: '**/${params.REPORTS_PATH}/*.txt'
+		    debug: true
                 )
             }
         }
