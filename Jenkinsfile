@@ -5,20 +5,20 @@ pipeline{
 		gradle('8.4')
 		jfrog'Jfrog_CLI'
 		
-	}	
+	}
+	
 	parameters	{
         string(name :'branch', defaultValue: 'main')
 	string(name :'url', defaultValue: 'https://github.com/Niharika-0331/First_Repo.git')
+        string(name: 'DEPLOY_ENV', defaultValue: 'production', description: 'Deployment environment')
+        string(name: 'RECIPIENT_EMAIL', defaultValue: 'niharikabobbili07@gmail.com', description: 'Recipient email address')
+        string(name: 'REPORTS_PATH', defaultValue: 'C:/Users/nbobbili/Downloads/Build reports', description: 'Path to reports')
+		
 	}
-	  environment {
-        ARTIFACTORY_SERVER_ID = 'jfrog_instance'
-        ARTIFACTORY_USERNAME  = 'niharikabobbili03@gmail.com'
-       ARTIFACTORY_PASSWORD = 'Taxilla@186'
-      REPO = 'result'
-        ARTIFACT = 'my-artifact'
-        VERSION = '1.0'
-        FILE_TO_UPLOAD = 'C:/Users/nbobbili/Downloads/${ARTIFACT}-${VERSION}.jar'
-    }
+	environment {
+		jfrog_CLI_home=tool 'Jfrog_CLI'
+		jfrog_instance
+	}
 	
     stages {
         stage('Git Checkout') {
@@ -36,21 +36,41 @@ pipeline{
                 }
             }
         }
-	    
-        stage('Upload to Artifactory') {
+	     stage('Upload to Artifactory') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: env.ARTIFACTORY_SERVER_ID, usernamePassword(usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD'))]) {
-                        bat "jfrog rt u ${FILE_TO_UPLOAD} ${REPO}/${ARTIFACT}/${VERSION}/${ARTIFACT}-${VERSION}.jar --url=${ARTIFACTORY_SERVER} --user=${ARTIFACTORY_SERVER_CREDENTIALS_USR} --apikey=${ARTIFACTORY_SERVER_CREDENTIALS_PSW} --build-name=my-build --build-number=1"
-                    }
-                }
+                    def server = 'https://taxilla.jfrog.io/artifactory'
+                    def repo = 'jfrog_repo-generic-local'
+                    def user = 'niharikabobbili03@gmail.com'
+                    def apiKey = 'Taxilla@186'  // or password
+                  // Replace 'your-artifact' and 'your-version' with your actual artifact details
+                    def artifact = 'my-artifact'
+                    def version = '1.0'
+                  // Example of uploading a JAR file
+                    def fileToUpload = 'C:/Users/nbobbili/Downloads/my-artifact.jar.zip'
+                    // Execute the JFrog CLI command to upload the artifact
+                    def command=  """${jfrog_CLI_home}\\jf rt u ${fileToUpload} ${repo}/ --url=${server} --user=${user} --password=${apiKey} --build-name=my-build --build-number=1"""
+                bat command
+		}
             }
         }
-    }
-    	post {
+	    stage('Post-Deployment') {
+            steps {
+            
+                emailext(
+                    subject: "Deployment Notification - ${params.DEPLOY_ENV}",
+                    body: "Deployment successful. Please find attached reports.",
+                    to: "${params.RECIPIENT_EMAIL}",
+                    attachLog: true,
+                    attachmentsPattern: "**/${params.REPORTS_PATH}/*.txt"
+                )
+            }
+        }
+    }	
+	post {
         success {
             echo 'Artifact uploaded successfully to Artifactory!'
         }
     }
 
- }	
+     }	
