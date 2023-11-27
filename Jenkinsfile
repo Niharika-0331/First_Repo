@@ -36,7 +36,7 @@ pipeline{
             steps {
                 script {
                     def server = 'https://taxilla.jfrog.io/'
-                    def repo = 'result'
+                    def repo = 'jfrog_repo-generic-local'
                     def user = 'niharikabobbili03@gmail.com'
                     def apiKey = 'Taxilla@186'  // or password
 
