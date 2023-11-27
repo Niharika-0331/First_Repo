@@ -5,8 +5,7 @@ pipeline{
 		gradle('8.4')
 		jfrog'Jfrog_CLI'
 		
-	}
-	
+	}	
 	parameters	{
         string(name :'branch', defaultValue: 'main')
 	string(name :'url', defaultValue: 'https://github.com/Niharika-0331/First_Repo.git')
