@@ -35,8 +35,6 @@ pipeline{
             }
         }
 	    
- stage('Upload to Artifactory') {
-
         stage('Upload to Artifactory') {
             steps {
                 script {
@@ -46,14 +44,12 @@ pipeline{
                 }
             }
         }
+    }
     
-}
 	post {
         success {
             echo 'Artifact uploaded successfully to Artifactory!'
         }
     }
 
-     }	
-	
-
+ }	
