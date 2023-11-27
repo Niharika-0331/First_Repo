@@ -61,7 +61,7 @@ pipeline{
                     to: "${params.RECIPIENT_EMAIL}",
                     attachLog: true,
                     attachmentsPattern: '**/${params.REPORTS_PATH}/*.txt'
-		    debug: true
+		    debug: true,
                 )
             }
         }
