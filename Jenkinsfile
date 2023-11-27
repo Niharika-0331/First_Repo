@@ -11,9 +11,13 @@ pipeline{
         string(name :'branch', defaultValue: 'main')
 	string(name :'url', defaultValue: 'https://github.com/Niharika-0331/First_Repo.git')
 	}
-	environment {
-		jfrog_CLI_home=tool 'Jfrog_CLI'
-	}
+	  environment {
+        ARTIFACTORY_SERVER_ID = 'jfrog_instance'
+        REPO = 'result'
+        ARTIFACT = 'my-artifact'
+        VERSION = '1.0'
+        FILE_TO_UPLOAD = ""C:/Users/nbobbili/Downloads/${ARTIFACT}-${VERSION}.jar"
+    }
 	
     stages {
         stage('Git Checkout') {
@@ -33,26 +37,18 @@ pipeline{
         }
 	    
  stage('Upload to Artifactory') {
+
+        stage('Upload to Artifactory') {
             steps {
                 script {
-                    def server = 'https://taxilla.jfrog.io/artifactory'
-                    def repo = 'jfrog_repo-generic-local'
-                    def user = 'niharikabobbili03@gmail.com'
-                    def apiKey = 'Taxilla@186'  // or password
-
-                    // Replace 'your-artifact' and 'your-version' with your actual artifact details
-                    def artifact = 'my-artifact'
-                    def version = '1.0'
-
-                    // Example of uploading a JAR file
-                    def fileToUpload = 'C:/Users/nbobbili/Downloads/my-artifact.jar.zip'
-
-                    // Execute the JFrog CLI command to upload the artifact
-
-                    def command=  """${jfrog_CLI_home}\\jf rt u ${fileToUpload} ${repo}/ --url=${server} --user=${user} --password=${apiKey} --build-name=my-build --build-number=1"""
-                bat command
-		}
+                    withCredentials([string(credentialsId: env.ARTIFACTORY_SERVER_ID, variable: 'Credentials')]) {
+                        bat "jfrog rt u ${FILE_TO_UPLOAD} ${REPO}/${ARTIFACT}/${VERSION}/${ARTIFACT}-${VERSION}.jar --url=${ARTIFACTORY_SERVER} --user=${ARTIFACTORY_SERVER_CREDENTIALS_USR} --apikey=${ARTIFACTORY_SERVER_CREDENTIALS_PSW} --build-name=my-build --build-number=1"
+                    }
+                }
             }
+        }
+    }
+}
         }
     }
 	
