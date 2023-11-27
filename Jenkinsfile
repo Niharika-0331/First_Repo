@@ -3,16 +3,13 @@ pipeline{
     agent any
 	tools{
 		gradle('8.4')
+		jfrog 'Jfrog_CLI'
 	}
 	
 	parameters	{
         string(name :'branch', defaultValue: 'main')
 	string(name :'url', defaultValue: 'https://github.com/Niharika-0331/First_Repo.git')
 	}
-	environment {
-        MY_CREDENTIALS = credentials[niharikabobbili03@gmail.com':'Taxilla@186']
-    }
-
 	
     stages {
         stage('Git Checkout') {
@@ -31,14 +28,28 @@ pipeline{
             }
         }
 	    
-stage('Upload to Artifactory') {
+ stage('Upload to Artifactory') {
             steps {
                 script {
-                    // Use Artifactory Maven or Gradle plugin or curl command to upload artifact
-                     echo "Using credentials: ${MY_CREDENTIALS}"
+                    def server = 'https://taxilla.jfrog.io/'
+                    def repo = 'result'
+                    def user = 'niharikabobbili03@gmail.com'
+                    def apiKey = 'Taxilla@186'  // or password
+
+                    // Replace 'your-artifact' and 'your-version' with your actual artifact details
+                    def artifact = 'my-artifact'
+                    def version = '1.0'
+
+                    // Example of uploading a JAR file
+                    def fileToUpload = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\Pipeline_demo\\my-artifact.jar'
+
+                    // Execute the JFrog CLI command to upload the artifact
+                    bat "jfrog rt u ${fileToUpload} ${repo}/${artifact}/${version}/ --url=${server} --user=${user} --apikey=${apiKey} --build-name=my-build --build-number=1"
                 }
             }
         }
+    }
+}
     }
 	
 	post {
