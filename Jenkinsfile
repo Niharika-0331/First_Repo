@@ -45,7 +45,7 @@ pipeline{
                     def version = '1.0'
 
                     // Example of uploading a JAR file
-                    def fileToUpload = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\Pipeline_demo\\my-artifact.jar'
+                    def fileToUpload = 'my-artifact.jar'
 
                     // Execute the JFrog CLI command to upload the artifact
 
