@@ -3,7 +3,7 @@ pipeline{
     agent any
 	tools{
 		gradle('8.4')
-		tool 'Jfrog_CLI'
+		jfrog'Jfrog_CLI'
 		
 	}
 	
