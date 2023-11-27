@@ -55,7 +55,7 @@ pipeline{
 	    stage('Post-Deployment') {
             steps {
             
-                emailtext(
+                emailext(
                     subject: "Deployment Notification - ${params.DEPLOY_ENV}",
                     body: "Deployment successful. Please find attached reports.",
                     to: "${params.RECIPIENT_EMAIL}",
