@@ -45,8 +45,7 @@ pipeline{
             }
         }
     }
-    
-	post {
+    	post {
         success {
             echo 'Artifact uploaded successfully to Artifactory!'
         }
