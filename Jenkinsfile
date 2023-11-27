@@ -3,7 +3,8 @@ pipeline{
     agent any
 	tools{
 		gradle('8.4')
-		jfrog 'Jfrog_CLI'
+		tool 'Jfrog_CLI'
+		
 	}
 	
 	parameters	{
@@ -44,7 +45,7 @@ pipeline{
                     def fileToUpload = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\Pipeline_demo\\my-artifact.jar'
 
                     // Execute the JFrog CLI command to upload the artifact
-                    bat 'jf rt u ${fileToUpload} ${repo}/${artifact}/${version}/ --url=${server} --user=${user} --apikey=${apiKey} --build-name=my-build --build-number=1'
+                    bat 'jfrog rt u ${fileToUpload} ${repo}/${artifact}/${version}/ --url=${server} --user=${user} --apikey=${apiKey} --build-name=my-build --build-number=1'
                 }
             }
         }
