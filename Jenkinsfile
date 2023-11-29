@@ -10,9 +10,8 @@ pipeline{
         string(name :'branch', defaultValue: 'main')
 	string(name :'url', defaultValue: 'https://github.com/Niharika-0331/First_Repo.git')
         string(name: 'DEPLOY_ENV', defaultValue: 'production', description: 'Deployment environment')
-        string(name: 'RECIPIENT_EMAILS', defaultValue: 'vkavalipurapu@taxilla.com', description: 'Recipient email address')	
-	string(name: 'CC_RECIPIENT_EMAIL', defaultValue: 'gmekala@taxilla.com', description: 'CC Recipient email addresses')		
-	 string(name: 'REPORTS_PATH', defaultValue: 'C:/Users/nbobbili/Downloads/Build reports', description: 'Path to reports')
+        string(name: 'RECIPIENT_EMAILS', defaultValue: 'vkavalipurapu@taxilla.com , gmekala@taxilla.com', description: 'Recipient email address')			
+	string(name: 'REPORTS_PATH', defaultValue: 'C:/Users/nbobbili/Downloads/Build reports', description: 'Path to reports')
 		
 	}
 	environment {
@@ -55,17 +54,23 @@ pipeline{
         }
 	    stage('Post-Deployment') {
             steps {
+		     script {
+                    // Check if RECIPIENT_EMAIL is null or empty
+                    def recipients = params.RECIPIENT_EMAIL ? params.RECIPIENT_EMAIL.split(',').join(',') : ''
+                    
+                    // Log recipients for debugging
+                    echo "Recipients: ${recipients}"
                 emailext(
                     subject: "Deployment Notification - ${params.DEPLOY_ENV}",
                     body: "Deployment successful. Please find attached reports.",
-                    to: "${params.RECIPIENT_EMAILS}",
-		    cc: "${params.CC_RECIPIENT_EMAILS}",	
+                    to: recipients ,
 		    attachLog: true,
                     attachmentsPattern: '**/${params.REPORTS_PATH}/*.txt'
                 )
 		    }
             }
         }
+    }
     	
 	post {
         success {
