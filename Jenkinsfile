@@ -59,14 +59,19 @@ pipeline{
                     def recipients = params.RECIPIENT_EMAIL ?: ''
                     
                     // Log recipients for debugging
-                    echo "Recipients: ${recipients}"
-                emailext(
-                    subject: "Deployment Notification - ${params.DEPLOY_ENV}",
-                    body: "Deployment successful. Please find attached reports.",
-                    to: recipients.split(',') ,
-		    attachLog: true,
-                    attachmentsPattern: '**/${params.REPORTS_PATH}/*.txt'
-                )
+                    echo "Recipients: ${recipients}"		     
+              if (recipients) {
+                        emailext(
+                            subject: "Deployment Notification - ${params.DEPLOY_ENV}",
+                            body: "Deployment successful. Please find attached reports.",
+                            to: recipients,
+                            recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                            attachLog: true,
+                            attachmentsPattern: '**/${params.REPORTS_PATH}/*.txt'
+                        )
+                    } else {
+                        echo "No recipients specified. Skipping email notification."
+                    }
 		    }
             }
         }
