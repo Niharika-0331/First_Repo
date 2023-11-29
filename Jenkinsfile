@@ -10,7 +10,8 @@ pipeline{
         string(name :'branch', defaultValue: 'main')
 	string(name :'url', defaultValue: 'https://github.com/Niharika-0331/First_Repo.git')
         string(name: 'DEPLOY_ENV', defaultValue: 'production', description: 'Deployment environment')
-        string(name: 'RECIPIENT_EMAILS', defaultValue: 'vkavalipurapu@taxilla.com,gmekala@taxilla.com', description: 'Recipient email address')	
+        string(name: 'RECIPIENT_EMAILS', defaultValue: 'vkavalipurapu@taxilla.com', description: 'Recipient email address')	
+	string(name: 'CC_RECIPIENT_EMAIL', defaultValue: 'gmekala@taxilla.com', description: 'CC Recipient email addresses')		
 	 string(name: 'REPORTS_PATH', defaultValue: 'C:/Users/nbobbili/Downloads/Build reports', description: 'Path to reports')
 		
 	}
@@ -54,12 +55,11 @@ pipeline{
         }
 	    stage('Post-Deployment') {
             steps {
-		    script{
-            def recipients = params.RECIPIENT_EMAIL ? params.RECIPIENT_EMAIL.split(',').join(',') : ''
                 emailext(
                     subject: "Deployment Notification - ${params.DEPLOY_ENV}",
                     body: "Deployment successful. Please find attached reports.",
-                    to: recipients,
+                    to: "${params.RECIPIENT_EMAILS}",
+		    cc: "${params.CC_RECIPIENT_EMAILS}",	
 		    attachLog: true,
                     attachmentsPattern: '**/${params.REPORTS_PATH}/*.txt'
                 )
