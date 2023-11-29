@@ -55,7 +55,7 @@ pipeline{
 	    stage('Post-Deployment') {
             steps {
 		    script{
-            def recipients = params.RECIPIENT_EMAIL.split(',').join(',')
+            def recipients = params.RECIPIENT_EMAIL ? params.RECIPIENT_EMAIL.split(',').join(',') : ''
                 emailext(
                     subject: "Deployment Notification - ${params.DEPLOY_ENV}",
                     body: "Deployment successful. Please find attached reports.",
