@@ -56,7 +56,7 @@ pipeline{
             steps {
 		     script {
                     // Check if RECIPIENT_EMAIL is null or empty
-                    def recipients = params.RECIPIENT_EMAIL ? params.RECIPIENT_EMAIL.split(',').join(',') : ''
+                    def recipients = params.RECIPIENT_EMAIL ?: ''
                     
                     // Log recipients for debugging
                     echo "Recipients: ${recipients}"
