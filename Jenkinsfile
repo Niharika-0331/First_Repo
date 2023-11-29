@@ -11,7 +11,8 @@ pipeline{
 	string(name :'url', defaultValue: 'https://github.com/Niharika-0331/First_Repo.git')
         string(name: 'DEPLOY_ENV', defaultValue: 'production', description: 'Deployment environment')
         string(name: 'RECIPIENT_EMAIL', defaultValue: 'vkavalipurapu@taxilla.com', description: 'Recipient email address')
-        string(name: 'REPORTS_PATH', defaultValue: 'C:/Users/nbobbili/Downloads/Build reports', description: 'Path to reports')
+	string(name: 'RECIPIENT_EMAIL_cc', defaultValue: 'gmekala@taxilla.com', description: 'Recipient email address')		
+	 string(name: 'REPORTS_PATH', defaultValue: 'C:/Users/nbobbili/Downloads/Build reports', description: 'Path to reports')
 		
 	}
 	environment {
@@ -59,7 +60,8 @@ pipeline{
                     subject: "Deployment Notification - ${params.DEPLOY_ENV}",
                     body: "Deployment successful. Please find attached reports.",
                     to: "${params.RECIPIENT_EMAIL}",
-                    attachLog: true,
+		    cc: "${params.RECIPIENT_EMAIL_cc}",
+		    attachLog: true,
                     attachmentsPattern: '**/${params.REPORTS_PATH}/*.txt'
                 )
             }
