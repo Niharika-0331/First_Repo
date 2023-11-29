@@ -64,7 +64,7 @@ pipeline{
                         emailext(
                             subject: "Deployment Notification - ${params.DEPLOY_ENV}",
                             body: "Deployment successful. Please find attached reports.",
-                            to: recipients,
+                            to: recipients.join(','), 
                             recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
                             attachLog: true,
                             attachmentsPattern: '**/${params.REPORTS_PATH}/*.txt'
