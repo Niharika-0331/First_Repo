@@ -54,6 +54,7 @@ pipeline{
         }
 	    stage('Post-Deployment') {
             steps {
+		    script{
             def recipients = params.RECIPIENT_EMAIL.split(',').join(',')
                 emailext(
                     subject: "Deployment Notification - ${params.DEPLOY_ENV}",
@@ -62,6 +63,7 @@ pipeline{
 		    attachLog: true,
                     attachmentsPattern: '**/${params.REPORTS_PATH}/*.txt'
                 )
+		    }
             }
         }
     }	
