@@ -52,7 +52,7 @@ pipeline{
 		}
             }
         }
-	    stage('Post-Deployment') {
+	    stage('Sending_email') {
             steps {
 		     script {
                     // Check if RECIPIENT_EMAIL is null or empty
@@ -69,7 +69,8 @@ pipeline{
                             attachLog: true,
                             attachmentsPattern: '**/${params.REPORTS_PATH}/*.txt'
                         )
-                    } else {
+                    } 
+			     else {
                         echo "No recipients specified. Skipping email notification."
                     }
 		    }
