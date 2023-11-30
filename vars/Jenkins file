@@ -1,4 +1,3 @@
-@Library (First_Repo)_
 pipeline{
     agent any
     stages {
