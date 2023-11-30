@@ -4,12 +4,16 @@ pipeline{
     stages {
         stage('Git Checkout') {
             steps {
-            script{
-            checkout script.call()
-
-            }
-            }
-			}
-        
-         }
+          echo 'Git checkout'
 }
+}
+ stage('build') {
+            steps {
+          echo 'building the binary'
+}
+}
+}
+
+
+
+
