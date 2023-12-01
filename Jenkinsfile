@@ -39,7 +39,7 @@ pipeline{
             steps {
                 script {
                     // Run Ansible playbook for deployment
-                    sh 'ansible-playbook -i /etc/ansible/hosts deploy.yml'
+                    bat 'ansible-playbook -i /etc/ansible/hosts deploy.yml'
                 }
             }
         }
