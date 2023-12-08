@@ -1,9 +1,6 @@
 @Library ('First_Repo')_
 pipeline{
     agent any
-	tools{
-			gradle('7.3')
-	}
 	
     stages {
         stage('Git Checkout') {
@@ -13,14 +10,7 @@ pipeline{
             }
             }
 			}
-	     stage('Build') {
-            steps {
-                script {
-                    // Run Gradle build command
-                    bat 'gradle build'
-                }
-            }
-        }
+	
 	 
     }
     	
