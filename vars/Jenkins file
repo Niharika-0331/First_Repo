@@ -1,23 +1,4 @@
-pipeline{
-    agent any
-    stages {
-        stage('Git Checkout') {
-            steps {
-          echo 'Git checkout'
-}
-}
- stage('build') {
-            steps {
-          echo 'building the binary'
-}
-}
- stage('deploy') {
-            steps {
-          echo 'deploying the binary'
-}
-}
-}
-}
+
 
 
 
