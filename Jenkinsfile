@@ -1,16 +1,16 @@
+@Library ('First_Repo')_
 pipeline{
     agent any
-	
-    stages {
+	  stages {
         stage('Git Checkout') {
             steps {
             script{
-        echo "Git checkout"
+            checkout_script(params)
             }
             }
+			          }
 			}
 	
 	 
     }
     	
-}
