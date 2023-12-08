@@ -1,4 +1,4 @@
-@Library ('First_Repo@main')_
+@Library ('First_Repo')_
 pipeline{
     agent any
 	
